@@ -13,9 +13,10 @@ class NFTService {
       return await this.Model.create({...nft,status:"active"});
     }
   
-    async checkUnicity(contract_address: String, token_id: Number,) {
+    async checkUnicity(contract_address: String, token_id: Number) {
       const nft = await this.Model.findOne({ contract_address: contract_address, token_id: token_id });
       if(nft) throw new customError(400, "NFT exist with the same combination of contract_address and token_id");
+      return;
     }
   
 
@@ -34,13 +35,10 @@ class NFTService {
         nft.block_number = block_number;
 
         await nft.save();
-        return;
+        return nft;
     }
   
 
-    async findByName(name:String) {
-      return await this.Model.findOne({ name });
-    }
 }
   
   export default new NFTService(NFTModel);

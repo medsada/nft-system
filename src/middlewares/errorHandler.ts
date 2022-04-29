@@ -14,7 +14,7 @@ const errorHandler: ErrorRequestHandler = (err:customError, req:Request, res:Res
       logger.error(err.status + err.message);
       res.status(err.status).send("INTERNAL_SERVER_ERROR");
     }
-    else res.status(err.status).send(err.message);
+    else res.status(err.status).json({succes:false, error:err.message});
 
 };
   
