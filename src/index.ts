@@ -6,12 +6,14 @@ import jwtMiddleware from './middlewares/jwt';
 import errorHandler from './middlewares/errorHandler';
 
 import adminRouter from './routes/adminRoute'
-
+import nftRouter from './routes/nftRoute'
 
 const app: Express = express();
 app.use(express.json());
 
 app.use('/admin', jwtMiddleware, adminRouter);
+
+app.use('/api/nft',  nftRouter);
 
 app.use(errorHandler)
 
