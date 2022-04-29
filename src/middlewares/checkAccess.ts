@@ -11,9 +11,9 @@ ac.grant('admin')
 
 function checkAccess(actionResource: string) {
   return function check(req:Request, res:Response, next:NextFunction) {
-    if (!req.body.userToken || !req.body.userToken.roles) throw new customError(400, "You have no role");
+    if (!res.locals.user || !res.locals.user.roles) throw new customError(400, "You have no role");
     const [action, resource] = actionResource.split(".");
-    let permission = ac.permission({role:req.body.userToken.roles, action: action, resource: resource});
+    let permission = ac.permission({role:res.locals.user.roles, action: action, resource: resource});
     if (!permission.granted) throw new customError(403, "Your not authorized to this resource");
     next();
   };

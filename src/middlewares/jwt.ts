@@ -19,7 +19,7 @@ const jwtMiddleware = async (req:Request, res:Response, next:NextFunction) => {
     try {
       let payload;
       payload = verify(token, jwt_key);
-      req.body.userToken = payload;
+      res.locals.user = payload;
     } catch (e) {
         const err = new customError(401, "Login is required");
         next(err);
