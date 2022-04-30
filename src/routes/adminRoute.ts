@@ -5,6 +5,6 @@ import { getNFTs, deleteNFT } from '../controllers/admincontroller';
 
 router.get('/nft', checkAccess("read:any.nft"), getNFTs);
 
-router.delete('/nft/:nftId', checkAccess("delete:any.nft"), deleteNFT);
+router.delete('/nft', checkAccess("delete:any.nft"), deleteNFT);
 
 export default router;

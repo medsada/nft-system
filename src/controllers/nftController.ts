@@ -11,7 +11,7 @@ const validateTransferNFT = {
     from: Joi.string().description("from").error(new customError(400, "from is string")),
     to: Joi.string().description("to").required().error(new customError(400, "to is required string")),
     block_number: Joi.number().min(0).description("block_number").required().error(new customError(400, "block_number is required positive number")),
-  })
+  }).error(new customError(400, "invalid data"))
 }
 
 
