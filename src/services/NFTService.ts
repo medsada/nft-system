@@ -26,7 +26,7 @@ class NFTService {
                         from: String,
                         block_number: Number) {
 
-        const nft = await this.Model.findOne({ contract_address: contract_address, token_id: token_id });
+        const nft = await this.Model.findOne({ contract_address: contract_address, token_id: token_id, owner: from, status:{$ne:"deleted"} });
         if(!nft) throw new customError(400, "NFT not found");
 
         if(nft.block_number >= block_number) throw new customError(400, "past block_number is higher than the actual");

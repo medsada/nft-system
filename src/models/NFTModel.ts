@@ -8,7 +8,11 @@ const nftSchema = new Schema<INFT>({
     creator: {type: String, required: true},
     block_number: {type: Number, required: true},
     status: {type: String, required: true},
-});
+    },
+    {
+    timestamps: true,
+    }
+);
 
 const NFTModel = model<INFT>("NFT", nftSchema);
 export default NFTModel;
