@@ -9,22 +9,22 @@ class NFTService {
       this.Model = Model;
     }
 
-    async createNewNFT(nft:Object) {
+    async createNewNFT(nft: any) {
       return await this.Model.create({...nft,status:"active"});
     }
   
-    async checkUnicity(contract_address: String, token_id: Number) {
+    async checkUnicity(contract_address: string, token_id: number) {
       const nft = await this.Model.findOne({ contract_address: contract_address, token_id: token_id });
       if(nft) throw new customError(400, "NFT exist with the same combination of contract_address and token_id");
       return;
     }
   
 
-    async updateTransfer(contract_address: String,
-                        token_id: Number,
-                        to: String,
-                        from: String,
-                        block_number: Number) {
+    async updateTransfer(contract_address: string,
+                        token_id: number,
+                        to: string,
+                        from: string,
+                        block_number: number) {
 
         const nft = await this.Model.findOne({ contract_address: contract_address, token_id: token_id, owner: from, status:{$ne:"deleted"} });
         if(!nft) throw new customError(400, "NFT not found");
@@ -39,15 +39,15 @@ class NFTService {
     }
 
 
-    async getNFTListToAdmin(contract_address?: String , owner?: String , creator?: String){
+    async getNFTListToAdmin(contract_address?: string , owner?: string , creator?: string){
 
       interface Ifilter {
-        contract_address?: String,
-        owner?: String,
-        creator?: String
+        contract_address?: string,
+        owner?: string,
+        creator?: string
       }
 
-      let query:Ifilter = {};
+      const query:Ifilter = {};
 
       if(contract_address) query.contract_address = contract_address;
 
@@ -61,7 +61,7 @@ class NFTService {
       return nfts;
     }
   
-    async deleteNFTByAdmin(contract_address:String, token_id:Number) {
+    async deleteNFTByAdmin(contract_address: string, token_id: number) {
       return await this.Model.findOneAndUpdate({contract_address, token_id}, {$set: {status: "deleted"}}, {new: true});
     }
 }

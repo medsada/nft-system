@@ -14,11 +14,10 @@ const getAuthorizationToken = (authorization:string) => {
 
 const jwtMiddleware = async (req:Request, res:Response, next:NextFunction) => {
     
-    let { authorization } = req.headers;
-    let token = getAuthorizationToken(authorization||"");
+    const { authorization } = req.headers;
+    const token = getAuthorizationToken(authorization||"");
     try {
-      let payload;
-      payload = verify(token, jwt_key);
+      const payload = verify(token, jwt_key);
       res.locals.user = payload;
     } catch (e) {
         const err = new customError(401, "Login is required");

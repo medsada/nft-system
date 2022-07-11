@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import express, { Express, Request, Response } from 'express';
+import express, { Express } from 'express';
 import connectDB from './dbConnection';
 
 import jwtMiddleware from './middlewares/jwt';
