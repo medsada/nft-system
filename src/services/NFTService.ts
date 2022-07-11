@@ -20,7 +20,7 @@ class NFTService {
     }
   
 
-    async updateTransfer(contract_address: string,
+    async updateTransfer(contract_address: String,
                         token_id: number,
                         to: string,
                         from: string,
