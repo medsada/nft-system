@@ -1,10 +1,10 @@
 interface INFT {
-    contract_address: String,
-    token_id: Number,
-    owner: String,
-    creator: String,
-    block_number: Number,
-    status: String,
+    contract_address: string,
+    token_id: number,
+    owner: string,
+    creator: string,
+    block_number: number,
+    status: string,
 }
 
 export default INFT;
